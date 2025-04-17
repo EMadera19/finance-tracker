@@ -7,7 +7,7 @@ class Transaction:
         self.name = name # e.g., "Salary", "Groceries"
         self.amount = amount # e.g., 2500 for income or -200 for an expense
         self.category = category # e.g., "Income", "Food", "Utilities"
-        self.date = datetime.datetime.now() #Automatically capture the current date and time when the transaction is created
+        self.date = datetime.date.today() #Automatically capture the current date and time when the transaction is created
 
     def __repr__(self):
         # This method returns a string representation of the transaction object.
@@ -31,3 +31,10 @@ class Budget:
 
     def total_income(self):
         return sum(t.amount for t in self.transactions if t.amount > 0)  # Return the total amount of income (sum of all positive amounts)
+    
+    def filter_by_month(self, month, year):
+        filtered = []
+        for transaction in self.transactions:
+            if transaction.date.month == month and transaction.date.year == year:
+                filtered.append(transaction)
+        return filtered

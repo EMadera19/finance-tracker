@@ -13,10 +13,11 @@ def main():
         print("2. View Transactions")
         print("3. View Total Spent")
         print("4. View Total Income")
-        print("5. Exit")
+        print("5. View Transactions by Month")
+        print("6. Exit")
 
         # Prompt the user to enter their choice
-        choice = input("Enter your choice (1-5): ")
+        choice = input("Enter your choice (1-6): ")
 
         # Process the user's choice
 
@@ -45,9 +46,24 @@ def main():
         elif choice == '4':
             total_income = budget.total_income()
             print(f"Total income: ${total_income:.2f}")
+        
+        # View transactions by month
+        elif choice == '5':
+            month = int(input("Enter the month (1-12): "))
+            year = int(input("Enter the year (YYYY): "))
+            filtered = budget.filter_by_month(month, year)
+
+            # Filter transactions by month and year
+            if filtered:
+                print(f"\nTransactions for {month}/{year}:")
+                for t in filtered:
+                    print(f"{t.date} - {t.name} - ${t.amount:.2f} - {t.category}")
+
+            else:
+                print(f"No transactions found for {month}/{year}.")
 
         # Exit the loop and end the program
-        elif choice == '5':
+        elif choice == '6':
             
             print("Exiting the Finance Tracker. Goodbye!")
             break
